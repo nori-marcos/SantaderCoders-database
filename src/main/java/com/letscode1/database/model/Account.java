@@ -23,7 +23,8 @@ public class Account {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-//  Durante o mapeamento, o nome da coluna do banco de dados pode ser diferente do nome da propriedade do objeto
+  //  Durante o mapeamento, o nome da coluna do banco de dados pode ser diferente do nome da
+  // propriedade do objeto
   @Column(name = "numero")
   private Integer number;
 

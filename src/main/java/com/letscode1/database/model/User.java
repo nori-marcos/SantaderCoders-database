@@ -1,7 +1,7 @@
 package com.letscode1.database.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.letscode1.database.request.UserRequest;
+import com.letscode1.database.DTO.request.UserRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -45,7 +45,7 @@ public class User {
   private LocalDateTime updateDate;
 
   @JsonIgnore
-  @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<Account> accountList;
 
   public User(UserRequest userRequest) {

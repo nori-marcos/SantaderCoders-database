@@ -1,9 +1,9 @@
 package com.letscode1.database.service.impl;
 
+import com.letscode1.database.DTO.response.UserResponse;
 import com.letscode1.database.model.User;
 import com.letscode1.database.repository.UserRepository;
-import com.letscode1.database.request.UserRequest;
-import com.letscode1.database.response.UserResponse;
+import com.letscode1.database.DTO.request.UserRequest;
 import com.letscode1.database.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
   @Override
   public UserResponse create(UserRequest userRequest) {
     User user = new User(userRequest);
-    userRepository.save(user);
+    user = userRepository.save(user);
 
     return new UserResponse(user);
   }
@@ -36,7 +36,6 @@ public class UserServiceImpl implements UserService {
   public User getById(Integer id) {
     return userRepository.findById(id).orElseThrow();
   }
-
 
   @Override
   public List<User> search(String search) {
@@ -48,12 +47,20 @@ public class UserServiceImpl implements UserService {
     return null;
   }
 
-
   @Override
   public User update(UserRequest userRequest, Integer id) {
-    return null;
+    User user = userRepository.findById(id).orElseThrow();
+
+    user.setName(userRequest.getName());
+    user.setCpf(userRequest.getCpf());
+    user.setPassword(userRequest.getPassword());
+
+    return userRepository.save(user);
   }
 
   @Override
-  public void delete(Integer id) {}
+  public void delete(Integer id) {
+    var user = userRepository.findById(id).orElseThrow();
+    userRepository.delete(user);
+  }
 }

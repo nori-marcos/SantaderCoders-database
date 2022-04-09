@@ -9,28 +9,33 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-    List<User> findByName(String name);
+  List<User> findByName(String name);
 
-    List<User> findByNameAndCpf(String name, String cpf);
+  //  Alguns exemplos de métodos do JPA
+  List<User> findByNameAndCpf(String name, String cpf);
 
-    List<User> findByNameIs(String name);
-    List<User> findByNameIsNot(String name);
+  List<User> findByNameIs(String name);
 
-    List<User> findByNameIsNull();
-    List<User> findByNameIsNotNull();
+  List<User> findByNameIsNot(String name);
 
-    List<User> findByCpfStartingWith(String cpf);
-    List<User> findByCpfEndingWith(String cpf);
-    List<User> findByCpfContaining(String cpf);
+  List<User> findByNameIsNull();
 
+  List<User> findByNameIsNotNull();
 
-    List<User> findByNameLike(String pattern);
+  List<User> findByCpfStartingWith(String cpf);
 
-    List<User> findByCreationDateBeforeAndNameAndCpf(LocalDateTime creationDate, String name, String cpf);
-    List<User> findByCreationDate(LocalDateTime creationDate);
+  List<User> findByCpfEndingWith(String cpf);
 
-    List<User> findByNameAndCreationDateOrderByNameAsc(String name, LocalDateTime creationDate);
+  List<User> findByCpfContaining(String cpf);
 
-    User findByCpf(String cpf);
+  List<User> findByNameLike(String pattern);
 
+  List<User> findByCreationDateBeforeAndNameAndCpf(
+      LocalDateTime creationDate, String name, String cpf);
+
+  List<User> findByCreationDate(LocalDateTime creationDate);
+
+  List<User> findByNameAndCreationDateOrderByNameAsc(String name, LocalDateTime creationDate);
+
+  User findByCpf(String cpf);
 }
