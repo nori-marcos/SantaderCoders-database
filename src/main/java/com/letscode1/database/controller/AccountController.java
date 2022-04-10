@@ -40,7 +40,6 @@ public class AccountController {
     return accountService.getById(id);
   }
 
-
   //  método para deletar contas pelo id de conta
   @DeleteMapping("/{id}")
   public void delete(@PathVariable Integer id) {

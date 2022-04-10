@@ -15,7 +15,6 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
   @Query("select a from Account a " + "where (a.user.cpf = :cpfDoUsuario) ")
   Account findByCpf(@Param("cpfDoUsuario") String cpf);
 
-  @Query
   List<Account> findByUser(User user);
 
 }

@@ -1,13 +1,14 @@
 package com.letscode1.database.service;
 
+import com.letscode1.database.DTO.request.UserRequest;
 import com.letscode1.database.DTO.response.UserResponse;
 import com.letscode1.database.model.User;
-import com.letscode1.database.DTO.request.UserRequest;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface UserService {
-  List<User> getAll(String name);
+  Page<User> getAll(String name, int page, int size);
 
   List<User> search(String search);
 

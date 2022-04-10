@@ -6,6 +6,9 @@ import com.letscode1.database.repository.UserRepository;
 import com.letscode1.database.DTO.request.UserRequest;
 import com.letscode1.database.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,11 +19,13 @@ public class UserServiceImpl implements UserService {
   @Autowired UserRepository userRepository;
 
   @Override
-  public List<User> getAll(String name) {
+  public Page<User> getAll(String name, int page, int size) {
+    PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.DESC, "name");
+
     if (name != null) {
-      return userRepository.findByName(name);
+      return userRepository.findByName(name, pageRequest);
     } else {
-      return userRepository.findAll();
+      return userRepository.findAll(pageRequest);
     }
   }
 

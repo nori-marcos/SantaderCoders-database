@@ -5,6 +5,7 @@ import com.letscode1.database.DTO.request.UserRequest;
 import com.letscode1.database.DTO.response.UserResponse;
 import com.letscode1.database.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,9 +16,14 @@ public class UserController {
   @Autowired UserService userService;
 
   @GetMapping
-  public List<User> getAll(@RequestParam(required = false) String name) {
-    return userService.getAll(name);
+  public Page<User> getAllPaged(@RequestParam(required = false) String name,
+                           @RequestParam(required = false, defaultValue = "8") int page,
+                           @RequestParam(required = false, defaultValue = "3")int size
+  ){
+    return userService.getAll(name, page, size);
   }
+
+
 
   @PostMapping
   public UserResponse create(@RequestBody UserRequest usuarioRequest) {
