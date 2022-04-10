@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @AllArgsConstructor
+
 public class UserResponse {
   private Integer id;
   private String cpf;

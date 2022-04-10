@@ -2,7 +2,8 @@ package com.letscode1.database.service.impl;
 
 import com.letscode1.database.DTO.request.AccountRequest;
 import com.letscode1.database.model.Account;
-import com.letscode1.database.model.User;
+import com.letscode1.database.model.AccountType;
+import com.letscode1.database.projection.AccountView;
 import com.letscode1.database.repository.AccountRepository;
 import com.letscode1.database.repository.UserRepository;
 import com.letscode1.database.service.AccountService;
@@ -81,4 +82,10 @@ public class AccountServiceImpl implements AccountService {
     var account = accountRepository.findById(id).orElseThrow();
     accountRepository.delete(account);
   }
+
+  @Override
+  public List<AccountView> getAllViewByAccountType(AccountType accountType){
+    return accountRepository.findAllByAccountType(accountType);
+  }
+
 }

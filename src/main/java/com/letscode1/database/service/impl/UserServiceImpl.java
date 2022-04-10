@@ -30,6 +30,12 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
+  public Page<UserResponse> getAllByCpf(String cpf, int page, int size){
+    PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.ASC, "id");
+    return userRepository.findByCpf(cpf, pageRequest);
+  }
+
+  @Override
   public UserResponse create(UserRequest userRequest) {
     User user = new User(userRequest);
     user = userRepository.save(user);
@@ -65,7 +71,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public void delete(Integer id) {
-    var user = userRepository.findById(id).orElseThrow();
+    User user = userRepository.findById(id).orElseThrow();
     userRepository.delete(user);
   }
 }

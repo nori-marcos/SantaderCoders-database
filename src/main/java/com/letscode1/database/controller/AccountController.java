@@ -2,10 +2,14 @@ package com.letscode1.database.controller;
 
 import com.letscode1.database.DTO.request.AccountRequest;
 import com.letscode1.database.model.Account;
+import com.letscode1.database.model.AccountType;
+import com.letscode1.database.projection.AccountView;
 import com.letscode1.database.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/account")
@@ -20,8 +24,8 @@ public class AccountController {
     return accountService.create(accountRequest, userId);
   }
 
-  //  método para atualizar dados da conta
-  @PutMapping
+  //  método para atualizar dados da conta pelo cpf
+  @PutMapping("/cpf")
   public Account update(
       @RequestBody AccountRequest accountRequest, @RequestParam(required = true) String cpf) {
     return accountService.update(accountRequest, cpf);
@@ -46,5 +50,11 @@ public class AccountController {
   @DeleteMapping("/{id}")
   public void delete(@PathVariable Integer id) {
     accountService.delete(id);
+  }
+
+  //  retorna uma view de contas
+  @GetMapping("/view")
+  public List<AccountView> getAllAccountViewByAccountType(@RequestParam AccountType accountType) {
+    return accountService.getAllViewByAccountType(accountType);
   }
 }

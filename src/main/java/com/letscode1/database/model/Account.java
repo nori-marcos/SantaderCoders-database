@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -41,16 +42,18 @@ public class Account {
 
   @Column(name = "data_atualizacao")
   @LastModifiedDate
+  @UpdateTimestamp
   private LocalDateTime updateDate;
 
   @Column(name = "agencia")
   private Integer agency;
 
+  @ManyToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+  private User user;
+
   @JsonIgnore
   @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
   private List<Transaction> transactionList;
 
-  @ManyToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "usuario_id", referencedColumnName = "id")
-  private User user;
 }

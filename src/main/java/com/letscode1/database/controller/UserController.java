@@ -21,6 +21,15 @@ public class UserController {
     return userService.getAll(name, page, size);
   }
 
+  @GetMapping("/cpf")
+  public  Page<UserResponse> getAllByCpf(
+          @RequestParam(required = false) String cpf,
+          @RequestParam(required = false, defaultValue = "0") int page,
+          @RequestParam(required = false, defaultValue = "5") int size
+  ){
+    return userService.getAllByCpf(cpf, page, size);
+  }
+
   @PostMapping
   public UserResponse create(@RequestBody UserRequest usuarioRequest) {
     return userService.create(usuarioRequest);

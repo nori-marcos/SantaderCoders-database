@@ -14,7 +14,9 @@ public interface UserService {
 
   List<UserResponse> getAllByCpf(String cpf);
 
-  UserResponse create(UserRequest userRequest);
+    Page<UserResponse> getAllByCpf(String cpf, int page, int size);
+
+    UserResponse create(UserRequest userRequest);
 
   User getById(Integer id);
 
