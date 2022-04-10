@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public Page<User> getAll(String name, int page, int size) {
-    PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.DESC, "name");
+    PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.ASC, "id");
 
     if (name != null) {
       return userRepository.findByName(name, pageRequest);

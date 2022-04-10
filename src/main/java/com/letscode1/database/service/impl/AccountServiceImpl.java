@@ -8,6 +8,9 @@ import com.letscode1.database.repository.UserRepository;
 import com.letscode1.database.service.AccountService;
 import com.letscode1.database.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -53,13 +56,19 @@ public class AccountServiceImpl implements AccountService {
   }
 
   @Override
-  public List<Account> getAll(String cpf) {
-    if (cpf != null) {
-      User user = userRepository.findByCpf(cpf);
-      return accountRepository.findByUser(user);
-    } else {
-      return accountRepository.findAll();
+  public Page<Account> getAll(String name, int page, int size) {
+    PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.ASC, "id");
+
+
+    if (name != null) {
+      return accountRepository.findByUser_Name(name, pageRequest);
     }
+      return accountRepository.findAll(pageRequest);
+  }
+
+  @Override
+  public Account getByName(String name) {
+    return accountRepository.findByName(name);
   }
 
   @Override
@@ -72,5 +81,4 @@ public class AccountServiceImpl implements AccountService {
     var account = accountRepository.findById(id).orElseThrow();
     accountRepository.delete(account);
   }
-
 }

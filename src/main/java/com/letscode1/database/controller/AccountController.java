@@ -4,9 +4,8 @@ import com.letscode1.database.DTO.request.AccountRequest;
 import com.letscode1.database.model.Account;
 import com.letscode1.database.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/account")
@@ -30,8 +29,11 @@ public class AccountController {
 
   //  método para pegar a lista de contas pelo CPF
   @GetMapping
-  public List<Account> getAll(@RequestParam(required = false) String cpf) {
-    return accountService.getAll(cpf);
+  public Page<Account> getAll(
+      @RequestParam(required = false) String name,
+      @RequestParam(required = false, defaultValue = "0") int page,
+      @RequestParam(required = false, defaultValue = "5") int size) {
+    return accountService.getAll(name, page, size);
   }
 
   //  método para buscar contas pelo id de conta
